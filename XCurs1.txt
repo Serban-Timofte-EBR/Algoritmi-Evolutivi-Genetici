@@ -1,0 +1,101 @@
+Seminar:
+    - Test seminar - 30p
+    - Teme, Teste Autocontrol dupa curs/seminar
+
+Curs: 
+    - Test teoretic la curs + test practic la seminar (1/2 si 1/2)
+    - Teme pe puncte anuntate
+    - Lucrare Finala
+
+Distributia uniforma si normala
+
+Parametrii distributiei uniforme:
+    - intervalul de generare ( de la a la b )
+
+Parametrii distributiei normale:
+    - media
+    - dispersie
+
+Spatiul solutiilor: 
+    - continuu ( o infinitate de puncte )
+
+Componente: 
+    - Alfabetul (binar, intreg, reale, cu permutari - valori numerice pentru a identifica o anumita permutare)
+
+
+Etape: 
+    Generatia 1 trebuie sa fie generata aleator, in tot spatiul de populare
+    Pe masura ce populatia evolueaza, populatia se concrentreaza in jurul varfurilor
+    Poate aparea inactivitate genetica, concentrarea in jurul punctelor de maxim local
+
+TIPURI DE PROBLEME:
+
+    Date de intrare -> Model -> Date de iesire
+
+    1. Probleme de optimizare:
+        Avem date de iesire si modelul => aflam date de intrare
+        Ex: comis - voiajor, n regine, planificare a activitatilor
+
+    2. Probleme de modelare / identificare a sistemului
+        Avem date de intrare, de iesire => aflam modelul
+        Ex: Are sau nu o boala cardiovasculara sau cancer
+
+    3. Probleme de simulare
+
+ELEMENTE GENERALE:
+
+    1. Multime de candidati ( din spatiul solutiilor )
+    2. Functie de calitate ( definita pe multimea candidatilor )
+    3. Calitatea indivizilor din populatie => Calitatea populatiei: media, media celui mai bun individ din populatie
+    4. Determinarea generatiei urmatoare
+        4.1. Selectarea parintilor cei mai buni din populatia curenta
+        4.2. Determinarea descendentilor 
+        4.3. Generatia descendentilor devine populatia curenta noua ( s-ar putea sa apara si mutatii )
+    
+ELEMENTELE CAUTARI:
+
+    1. Cautari dirijate de operatori
+        - Evolutie pas cu pas catre optim
+
+    2. Factori aleatori
+        - Alegerea populatiei initiale
+        - Selectia parintilor ( calitatii cu sanse pe baza calitatii )
+        - Matching parintilor 
+        - Probabilitatea ca parintii sa genereze descendenti
+        - Impartirea materialului genetic (lanturi mai lungi sau mai scurte)
+        - Mutatii ( pe alele - valori si gene - pozitii)
+
+FORMA GENERALA A UNUI EA:
+
+1. Construim Populatia Generala
+2. Evaluam Candidatii
+    - In functie de algoritm sunt sanse sa evaluam un individ dupa ce l-am evaluat
+
+3. Bucla Iterativa
+    4. Selectarea Parintilor
+    5. Recombinare Perechi = Apare Noua Generatie 
+    6. Aplicam Mutatii
+    7. Evaluarea Noilor Candidati ( Poate fi dupa ce un nou individ este generat )
+    8. Selectarea Indivizilor pentru Generatia Urmatoare
+
+
+CUM ALEGEM REZULTATUL FINAL? 
+    Cand atingem reazultatul, ajungem in intervalul e, de un numar de generatii nu ajungem la rezultat sau in interval ( numar maxim de iteratii permise )
+
+EX: f: [-1,1] -> R
+    f(x) = ...
+    Maximum lui f?
+
+R:  Spatiul fenotipului [-1, 1] -> le folosim ca atare
+    Dimensiunea populatiei: 
+    Selectia Parintilor: Metoda turnir 
+                            - Luam la intamplare 2 indivizi si il selectam pe cel cu calitatea mai mare ( cu max )
+    Recombinare: Facem media parintilor
+                Este o valoare din spatiul de cautare? Da
+                Cati indivizi avem? Jumatate
+                Recombinare - de ales
+                Mutatii - negare cu probabilitate de negare ( foarte mica )
+                Selectia: determinista 
+                        - aleg cei mai calitativi 
+
+    Conditii de determinare: Numar maxim de generatii permis
