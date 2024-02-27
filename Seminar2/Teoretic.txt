@@ -1,0 +1,27 @@
+print("Welcome to the PEAG Sem 02 - 27.02")
+# Problema Rucsacului
+# Fiecare obiect are o valoare si un cost si vrem sa facem o selectie cu restrictie de cost
+# Restrictie: suma costurilor sa fie mai mica decat costul maxim
+# Obiectiv: Maximizarea valorii obiectelor alese
+
+# n = 6 => posibila solutie:
+#   0       1       0       1       1       1
+#   gena    gena    gena    gena    gena    gena
+# --------------fenotip = individ----------------
+
+# caz Discret ( genele au valori din multimea binara )
+# caz Continuu ( genele au valori din intervalul [0,1] ) => un obiect are valoarea 0.72 => iau 72% din primul obiect
+
+#Pasii unui algoritm genetic:
+
+1. Determinarae formei unui individ ( individ = solutie a problemei )
+    - Determinarea numarului de gene al individului
+    - Determinarea tipului de date pentru gene (int, float, bool)
+    - Determinarea invervalului/multimii din care vor fi generate valorile genelor
+    - Determinarea formulei de calcul pentru calitatea unui individ
+        (calitate = fitness = functie obiectiv)
+    - Determinarea restrictiilor problemei ( daca exista )
+
+2. Generarea populatiei initiale
+    - o notam uzual cu "dim"
+    - de obicei, se alege de ordinul zecilor sau sutelor
