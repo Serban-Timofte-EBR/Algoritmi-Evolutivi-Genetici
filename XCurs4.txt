@@ -1,0 +1,80 @@
+RECOMBINARE IN ALGORITMI GENETICI
+    - Obtinerea de noi indivizi 
+    - Face parte din aria de exploatare => creem indivizi noi din alte zone din spatiul solutiilor
+    - De regula, se efectuaza dim/2 operatii de recombinare si se produc 2 descendenti
+    - Exista o probabilitate de recombinare
+
+REGULI PENTRU RECOMBINARE:
+1) Selectare parinti
+    - Indivizi distincti ( doua linii distincte)
+    - Un parinte nu se selecteaza de 2 ori in iteratii deferite
+    - MAI USOR => permutari de dim si se iau 2 cate 2 
+
+2) Probabilitate de recombinare
+    - r din [0,1] Probabilitate de Recombinare
+    - Daca probabilitatea indica ca nu se petrece recombinarea => parintii se copiaza direct, nu se combina
+    - Daca exista constrangeri, trebuie sa verific daca copiii sunt valizi (daca nu, copiez un parinte)
+    
+OPERATORI - Daca ne-am incadrat in r 
+    
+    x UNIPUNCT
+        - generez o pozitie in vectorul individ
+        - preiau partea dreapta de la un parinte si stanga de la celalalt parinte
+
+    x MULTIPUNCT
+        - extindere UNIPUNCT pe mai multe puncte de incrucisare
+        - preluam cate un punct de la fiecare parinte
+        - min. 2 si (teoretic) max. n-1 (dar nu alegem prea multe - 3, 4, 5)
+    
+    x UNIFORMA
+        - fiecare pozitie
+        - cate una din fiecare parinte
+
+    x Recombinarea de tip discret
+        - copiii difera doar cu o singura gena/alela
+
+    x Recombinarea totala
+
+    x Permutari
+        - OCX
+            O functie care creeaza un descendant ( o noua permutare )
+            Se apeleaza cu parintii in ordinea x, y  si odata in ordinea y, x
+            
+
+            CUM IMPLEMENTEZ?
+
+            Am doi parinti si aleg doua pozitii p1 si p2
+            Extrag secventa dintre p1 si p2 din parintele 1
+            Pornind de la pozitia p2 din copil, preiau din parintele 2 genele de la p2 la p1 fara a repeta genele
+            Dupa ce ajung la capat reiau procesul din parintele 2 de la capatul 0 index
+           
+            6   1   9   7   8   2   5   3   10  4
+                        p1          p2
+            5   3   2   4   10  1   8   9   6   7
+
+            4   10  1   7   8   2   5   9   6   8 
+
+        - PMX
+            Aplicam algoritmul pentru parinti x, y si y, x
+
+            Generam 2 pozitii p1 si p1 si copiem segmentul de la p1 la p2 in descendent
+            Copiem dintre p1 si p2 din al doilea parinte in descendent ( verificam sa nu fie valori dublate )
+                Avem 7 in parintele 2 primul element.
+                In parintele 1 pe pzoitia 1 este 4. 
+                Verfic unde este 4 in parintele 2 si acolo, in copil, pun 7 
+                    Daca pozitia este iarasi ocupata ?????
+
+        - CX
+            Preiau elementul 1 din p1 si ma uit la corespondentul lui in p2. Il adaug in ciclu
+            Continui, uitandu ma ce valoare din p2 ii corespunde genei abia adaugate in ciclu.
+
+            Repet iar cand ma blochez cu prina gena neinclusa
+
+            C1: Alelele din ciclul 1 se copiaza in parinti pe aceleasi pozitii ca in parinte 
+            C2: Acelasi lucru in copilul 2
+
+        - ECX 
+            Tema 
+        
+Recombinare multipla <=> mai mult de 2 parinti
+    - Usor de implementat, fara echivalent biologic
