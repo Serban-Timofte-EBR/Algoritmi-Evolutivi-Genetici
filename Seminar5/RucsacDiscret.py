@@ -99,3 +99,25 @@ import numpy
 populatie = numpy.asarray(populatie)
 copii = numpy.asarray(copii)
 '''
+
+"""
+Selectia:
+    1. Turnir
+        - de dim ori selectez k indivizi
+        - cel mai bun define parinte
+    2. Ruleta
+        - Determinam FPS
+            - vector cu toate valorile fitness din populatie
+            - se face suma vectorului
+            - fps se face impartind fiecare element din vector la suma totala
+            - q fps se face:
+                - prima valoarea se copiaza 
+                - de la a doua valaorea se face suma celor de dinainte plus elementul curent 
+            - se reprezinta valorile. Se alege o valaorea aleatoare fiecarui interval. In functie de intervalul din care
+            este extrasa valoarea, se alege parintele
+            - se aleg dim valori aleatoare
+    3. SUS
+        - se repeta ruleta, dar selectia se face diferit
+        - plecam de la o valaore r din [0, 1/dim] si aleg parintele in fucntie de valoarea
+        - adaug la r 1/dim
+"""
