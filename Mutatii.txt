@@ -1,0 +1,14 @@
+1. MUTATIE IN REPREZENTARE BINARA
+    - alegem pozitii din cromozom random si inversam 1 -> 0 si 0 -> 1
+
+2. MUTATIE PE SIRURI DE NUMERE INTREGI
+    - Schimbarea aleatoare a unei gene
+
+3. MUTATIA DE TIP FLUAJ
+    - se modifica gena cu o valoare t
+    - avem probabilitatea p de mutatie
+
+4. MUTATII IN SIRURI DE NUMERE REALEA
+    4.1. UNIFORMA
+        - fiecare gena din cromozom se modifica cu probabilitatea pm
+        - se modifica cu un numar x intre a si b
