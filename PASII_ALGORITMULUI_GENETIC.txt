@@ -42,7 +42,7 @@
 
 |
 |
-|    metode: TURNIR, RULETA, SUS
+|    
 |
 |
 
