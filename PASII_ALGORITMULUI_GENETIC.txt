@@ -1,0 +1,51 @@
+1. Determinarea structurii individului ( individ =  o solutie a problemei )
+    - numarul de gene
+    - tipul de date prin care sunt reprezentate genele
+    - determinarea intervalului din care se face selectia genelor
+    - determinarea functiei de fitness
+    - identificarea restrictiilor ( daca exista )
+
+|
+|
+|    functiile gen, ok
+|
+|
+
+2. Generarea populatiei initiale
+    - de dimensiune DIM
+
+|
+|
+|    metode: TURNIR, RULETA, SUS
+|
+|
+
+3. Selectia populatiei de parinti
+    - pe baza populatiei initiale
+    - de dimensiune DIM
+
+|
+|
+|    CROSSOVER
+|
+|
+
+4. Recombinarea parintilor => Generarea Copiilor
+
+|
+|
+|    functie: mutatie_populatie
+|
+|
+
+5. Mutatiile copiilor 
+
+|
+|
+|    metode: TURNIR, RULETA, SUS
+|
+|
+
+6. Selectarea urmatoarei generatii
+    - daca cel mai bun parinte este mai bun decat cel mai bun copil, atunci acesta este inserat random in lista copiilor, care devine urmatoarea generatie
+    
