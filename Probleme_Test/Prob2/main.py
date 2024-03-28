@@ -50,6 +50,14 @@ def recombinare_multipunct(parinte1, parinte2, pc):
         copil1_y = y1[0:puncte_y[0]] + y2[puncte_y[0]:puncte_y[1]] + y1[puncte_y[1]:puncte_y[2]] + y2[puncte_y[2]:]
         copil2_y = y2[0:puncte_y[0]] + y1[puncte_y[0]:puncte_y[1]] + y2[puncte_y[1]:puncte_y[2]] + y1[puncte_y[2]:]
 
+        if int(copil1_x, 2) > 1500 or int(copil1_y, 2) > 2500:
+            copil1_x = x1
+            copil1_y = y1
+
+        if int(copil2_x, 2) > 1500 or int(copil2_y, 2) > 2500:
+            copil2_x = x2
+            copil2_y = y2
+
     else:
         copil1_x, copil2_x = x1, x2
         copil1_y, copil2_y = y1, y2
@@ -66,16 +74,20 @@ def recombinare_multipunct(parinte1, parinte2, pc):
 
 def generare_noua_populatie(populatie, dim, pc):
     noua_populatie = populatie.copy()
-    for i in range(0, dim-1, 2):
+    for i in range(0, dim, 2):
         indiv1 = populatie[i].copy()
-        indiv2 = populatie[i+1].copy()
-        copil1, copil2 = recombinare_multipunct(indiv1, indiv2, pc)
-        noua_populatie[i] = copil1.copy()
-        noua_populatie[i+1] = copil2.copy()
-
+        if i+1 < dim:
+            indiv2 = populatie[i+1].copy()
+            copil1, copil2 = recombinare_multipunct(indiv1, indiv2, pc)
+            noua_populatie[i] = copil1.copy()
+            noua_populatie[i+1] = copil2.copy()
+        else:
+            noua_populatie[i] = indiv1.copy()
     return noua_populatie
 
-pop = generare_populatie(6)
+pop = generare_populatie(12)
+print("Populatie initiala ")
 print(pop)
 generatie_copii = generare_noua_populatie(pop, 5, 0.5)
+print("Populatie copii ")
 print(generatie_copii)

@@ -1,0 +1,25 @@
+SIRURI BINARE
+
+1. Incrucisare UNIPUNCT
+    - se alege indexul si de la index mai departe se copiaza din parintele secundar
+
+2. Incrucisare MULTIPUNCT 
+    - se extinde unipunct la mai multe puncte si se selecteaza pe rand din parinti
+
+3. Incrucisarea UNIFORMA
+    - Fiecare gena este preluata random de la un parinte sau altul
+
+4. Crossover SINGULAR:
+    - o gena random se formeaza prim formula
+        copil1[index] = indiv1[index] * alpha + indiv2[index] * (1-alpha)
+        copil2[index] =indiv2[index] * alpha + indiv1[index] * (1-alpha)
+
+5. Crossover SIMPLU:
+    - de la un index mai departe se respecta formula
+        copil1[index] = indiv1[index] * alpha + indiv2[index] * (1-alpha)
+        copil2[index] =indiv2[index] * alpha + indiv1[index] * (1-alpha)
+
+6. Crossover TOTAL:
+    - toate genele respecta formula
+        copil1[index] = indiv1[index] * alpha + indiv2[index] * (1-alpha)
+        copil2[index] =indiv2[index] * alpha + indiv1[index] * (1-alpha)
