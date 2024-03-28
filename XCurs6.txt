@@ -1,0 +1,118 @@
+Problema transportului
+    - Avem cantitatile oferite  de furnizori
+    - Avem cantitatile cerute de consumatori
+
+    - PROBLEMA ECHILIBRATA: cantitatile furnizorilor si consumatorilor sunt egale
+
+    - avem numarul de furnizori si vector cu cantitatile oferite 
+    - avem numarul de consumatori si vector cu cantitatile cerute
+    - matricea costurilor 
+
+    - Sa gasim un plan de transport ai costul de transport sa fie minim => matrice cu cantitati transportate
+
+    - Selectie elitista -> pastram individul cel mai bun daca generatia urmatoare nu are un individ mai bun
+
+1. REPREZENTAREA:
+    - Vector oferta, cerere 
+    - Matricea solutie: Linii furnizori, coloana consumatori ( cat se consuma de la i la j )
+    - Celula initiala are valoarea minima dintre oferta si cerere
+        - actualizam oferta si cerere
+    - reprezint liniar intr-un vector si aloc mereu min(cerere_ramasa, oferta_ramasa)
+    - INSERAREA SE FACE DUPA RANG
+        EX: 
+            9   5   14  2, etc
+            9 se aloca in matrice pe pozitia de rang 9 (linia 2, poz 4)
+    - REPREZINT CA PERMUTARE
+
+    PRACTIC: 
+
+        - Ma gandesc ca aloc valori celulelor
+        - Daca schimb ordinea alocarii am alt resultat  
+            - DECI AVEM O PERMUTARE 
+            1   2   3   4
+            9   8   2   1
+
+        - Din valoarea alocata consider ca este rangul => scot linie si coloana 
+        - Scad din fiecare vector ce a fost scazut
+
+2. RESTRICTII:
+    - sa am echilibru
+    - sa ofer minim intre cerere si oferta
+
+CUM DECODIFIC?
+
+cat timp am orferta ramasa > 0
+    calculez linia si coloana rangului
+    aloc x(lin, col) = min(o_r(lin), o_r(lin)) -> min din furnizor si coloana 
+    actualizez oferta ramasa pentru furnizori si consumatori
+    actualizez oferta totala
+    merg la urmatoarea pozitie
+
+FITNESS = produs scalar intre matrici
+
+POPULATIA INITIALA:
+    - se generaza aleator din spatiul permutarilor de n x n
+    - PROBLEMA FARA RESTRICTII 
+
+Operatori:
+    - Selectia parintilor: selectia de tip SUS cu sigma - scalare (FPS)
+    - Recombinare: CX (operator)
+        - fara constrangeri (schema)
+        - 0.8 probabilitatea de recombinare
+    - Mutatie: interschimbarea ( pentru ca am reprezentat cu permutari )
+        - fara constrangeri
+        - 0.1 probabilitatea de Mutatie
+    - Selectia generatiei urmatoare
+        - limita de varsta 1 + elitism
+
+Rezultat:
+    - cel mai bun rezultant in functie de numarul de indivizi si numar de iteratii
+
+
+----------------------------PUNCTE COLINIARE----------------------------
+
+Am n puncte in plan (pe baza de x si y)
+
+Din toata multimea punctelor sa gasim 3 puncte coliniare daca exista
+
+Cum imi dau seama? Lungimea a doua segmente formate adunate reprezinta lungimea celui de al treilea segment
+
+REPREZENTAREA INITIALA:
+    - Reprezentam fiecare punct printr-o valoarea
+    - Numerotam punctele
+    - Returnam o lista de numere care sunt coliniare
+        [1,2,3] -> punctele 1,2,3 sunt coliniare
+            - separat pastram o lista pentru fiecare punct coordonatele
+    
+    CONSTRANGERE:
+    - punctele sunt distincte
+        - returnul nu poate fi 1, 1, 1 sau 1,2,2, etc
+
+    SPATIUL SOLUTIILOR:
+        - multimea combinarilor de 3 luate cate n
+        - fiecare gena are valori de la 1 la n
+        - fenotip/genotip de cate 3 puncte
+        - CALITATEA: suma a doua laturi minus a treia
+            - FUNCTIA OBIECTIV: 1 / (1+diferenta minima)
+            - VALOAREA OPTIMA: 1 (sau cu marfa de 10^-4)
+
+POPULATIA INITIALA:
+    - Aleator, din spatiul solutiilor, cu respectarea restrictiilor { 1,2,3,4,5 ... } ^ 3
+    - 100 cromozomi fara repetare
+    - 3 alele per cromozom 
+
+MAX_GENERATII = 100
+
+SELECTARA PARINTILOR:
+    - SUS cu FPS sigma-scalare 
+
+RECOMBINARE: 
+    - Schema de recombinare pentru probleme cu constrangeri 
+    - OPERATOR: Recombinarea uniforma 
+
+MUTATIE:
+    - Schema generala de mutatie pentru probleme cu constrangeri
+    - Am atribute cardinale => Restarea aleatore ( Atribute cardinale pentru ca nu au legatura punctele intre ele )
+
+SELECTIA GENERATIEI URMATOARE:
+    - Ilitist cu limita de varsta 1 
