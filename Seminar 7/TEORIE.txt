@@ -1,0 +1,47 @@
+1. PERMUTARI (TSP):
+    - Crossover | Recombinare | Copii
+        - PMX
+        - OCX
+        - CX
+        - EX
+
+    - Mutatie
+        - interschimbare
+        - inversiune
+        - inserare
+
+2. NUMERE REALE (Rucsac Continuu):
+    - Crossover | Recombinare | Copii
+        - Singular
+        - Simplu
+        - Total
+
+    - Mutatii:
+        - Uniforma
+        - Neuniforma
+
+3. NUMERE INTREGI
+    - Crossover | Recombinare | Copii
+        - Unipunct
+        - Multipunct
+        - Uniform
+
+    - Mutatii:
+        - Resetare Aleatoarea
+        - Fluaj ( +/- 1)
+
+4. NUMERE BINARE (Rucsac Discret)
+    - Crossover | Recombinare | Copii
+        - Unipunct
+        - Multipunct
+        - Uniform
+
+    - Mutatii:
+        - Resetare Aleatoarea
+        - Negatie
+
+
+SELECTIA PARINTILOR:
+    - Turneru
+    - Ruleta
+    - SUS
