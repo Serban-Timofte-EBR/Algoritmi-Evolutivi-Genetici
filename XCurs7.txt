@@ -1,0 +1,34 @@
+Avem un set de sarcini ( J ) si sunt n sarcini ( j1, j2, ..., jn )
+    Pentru o sarcina avem m activitati care compune o sarcina
+    Fiecare activitate se executa cu cate o masina ( m masini )
+    Stim durata si masina pe care se executa
+
+CERINTA: Plan de executie pe masini pentru a avea o durata totala de executie cat mai mica
+
+- In fiecare set de sarcini exista o precedenta intre activitati
+- Nu se poate intrerupe o activitate
+- O masina executa o activitate, nu 2 simultan
+- Sarcinile sunt independente intre ele, dar anumite activitati din cadru sarcinilor exista conditii de precedenta ( sarcina 10 trebuie sa aiba sarcina 9 terminata )
+
+- Avem pentru o sarcina o lista de activitati ordonate in functie de ce activitati trebuie realizate inainte
+    - Avem o lista cu numarul  masinii necesara activitatii
+    - Avem o lista cu durate
+
+CALITATEA: Durata totala de executie (1/durata pentru a maximiza)
+MODEL DE REPREZENTARE: 
+    1) O permutare de lungime n x m -> in ce ordine planificam activitatile pe masini 
+    2) m masini, n sarcini => m permutari a cate n elemente => m*n gene ( intr-o permutare reprezinta ordinea de analizare a activitatilor pe o masina )
+        - le concatenam intr-un vector (de lungime m*n)
+        - cand fac planificarea verific precendenta activitatilor si a disponibilitatii masinii
+
+    DEVINE PROBLEMA FARA CONSTRANGERI 
+
+Se citeste: Acitivtatea din sarcina 2 care se executa pe masina 1, sarcina din activitate 3 care se executa pe masina 1
+
+[2, 3, 1, 5, 4] [2, 5 , 3, 2, 1] ...
+Masina 1         Masina 2
+
+- Citirea se face intorcand numarul activitatii din sarcina
+- Decodificarea:
+    - Trebuie determinat timpul de inceput pentru fiecare activitate
+
