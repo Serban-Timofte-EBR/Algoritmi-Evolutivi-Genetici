@@ -31,4 +31,3 @@ Masina 1         Masina 2
 - Citirea se face intorcand numarul activitatii din sarcina
 - Decodificarea:
     - Trebuie determinat timpul de inceput pentru fiecare activitate
-
