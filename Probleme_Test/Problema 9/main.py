@@ -74,3 +74,8 @@ def ruleta(pop_init):
 
 pop2 = ruleta(populatie_initiala)
 print(pop2)
+
+def dec_to_gray(val):
+    return val^(val>>1)
+
+print(dec_to_gray(10))
