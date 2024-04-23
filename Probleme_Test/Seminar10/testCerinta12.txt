@@ -1,0 +1,3 @@
+Cerinta rezolvata cu toti pasii scrisi in word
+    + printscreenuri daca este cazul
+    + tot codul
