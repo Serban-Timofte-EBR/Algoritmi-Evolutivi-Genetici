@@ -2,7 +2,6 @@ import numpy
 '''
 Functie de calculare a fitnessului
 '''
-
 def fitness(indiv):
     cost = 50 * indiv[0] + 70 * indiv[1] + 90 * indiv[2] + 60 * indiv[3] + 70 * indiv[4] + 100 * indiv[5]
     return 1 / cost
@@ -97,36 +96,50 @@ def mutatie(pop, prob_mut):
                 if 0 <= nou_val <= 120 and 0 <= nou_val2 <= 140:
                     indiv_nou[index] = nou_val
                     indiv_nou[index + 3] = nou_val2
-        indiv_nou.append(fitness(indiv_nou))
-        pop_mutanti.append(indiv_nou)
+        if check_indiv(indiv_nou):
+            indiv_nou.append(fitness(indiv_nou))
+            pop_mutanti.append(indiv_nou)
+        else:
+            pop_mutanti.append(indiv)
     return pop_mutanti
-
 
 '''
 Functie de implementare a algoritmului
 '''
+MAX_GENERATIONS = 25
+NO_IMPROVEMENT_LIMIT = 5
+
 def algoritm(dim, k):
-    populatia_initiala = generare_populatie_initiala(dim)
+    populatia = generare_populatie_initiala(dim)
+    best_fitness = 0
+    best_individual = None
+    generatii_fara_imbunatatire = 0
+    current_generation = 0
 
-    print("Populatie initiala: ")
-    print(populatia_initiala)
+    while current_generation < MAX_GENERATIONS and generatii_fara_imbunatatire < NO_IMPROVEMENT_LIMIT:
+        populatia_parinti = selectia_parintilor(populatia, k)
+        populatia_copii = recombinare_parinti(populatia_parinti)
+        populatia_mutanta = mutatie(populatia_copii, 0.2)
 
-    # print("\nVerificam daca toti indivizii sunt valizi")
-    # for indiv in populatia_initiala:
-    #     print(check_indiv(indiv))
+        populatia = populatia_mutanta
+        current_best = max(populatia, key=lambda indiv: indiv[-1])
 
-    populatia_parinti = selectia_parintilor(populatia_initiala, k)
-    populatia_copii = recombinare_parinti(populatia_parinti)
-    populatia_copii_mutanti = mutatie(populatia_copii, 0.2)
+        if current_best[-1] > best_fitness:
+            best_fitness = current_best[-1]
+            best_individual = current_best
+            generatii_fara_imbunatatire = 0
+        else:
+            generatii_fara_imbunatatire += 1
 
-    print("Populatie parintilor: ")
-    print(populatia_parinti)
+        current_generation += 1
 
-    print("Populatie copii: ")
-    print(populatia_copii)
+        print(f"Generația {current_generation}: Cost: {1/best_fitness}")
 
-    print("Populatie mutatie: ")
-    print(populatia_copii_mutanti)
+    print("Cel mai bun individ final:")
+    print(best_individual)
+    print("Cost:")
+    print(1/best_fitness)
+
 
 '''
 Apelarea algortimului
