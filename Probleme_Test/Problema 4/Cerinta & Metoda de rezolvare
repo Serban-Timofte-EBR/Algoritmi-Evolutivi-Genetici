@@ -1,0 +1,91 @@
+Un produs P este obţinut în două fabrici situate în două orașe (Bucureşti şi Craiova) şi este stocat
+pentru desfacere în trei depozite, unul situat în Ploieşti, unul în Piteşti şi unul la Cluj. Fabrica din
+Bucureşti poate produce săptămînal 120 de tone din produsul P, iar fabrica din Craiova poate produce
+P în cantitate de 140 tone pe săptămînă. Pentru desfacerea produsului, necesarul săptămînal este:
+pentru depozitul din Ploieşti 100 de tone, pentru depozitul din Piteşti, 60 de tone, respectiv pentru
+depozitul din Cluj 80 de tone. În tabelul de mai jos sînt prezentate costurile de transport pe tona de
+produs.
+
+          Ploieşti      Piteşti     Cluj
+Bucureşti   50             70        90
+Craiova     60             70        100
+
+Problema de rezolvat: calculul numărului de tone din produsul P care trebuie furnizate de cele două fabrici
+fiecărui depozit astfel încît costul de transport să fie minim şi astfel încît să fie respectate condiţiile enunţate
+mai sus.
+
+Rezolvare:
+
+1. Datele problemei
+    Fabrici: Bucuresti (120 tone), Craiova (140 tone)
+    Destinatii: Ploiesti (100 tone), Pitesti (60 tone), Cluj (80 tone)
+    Costuri:
+              Ploieşti      Piteşti     Cluj
+    Bucureşti   50             70        90
+    Craiova     60             70        100
+
+
+ 2.  Reprezentarea individului:
+    Un individ este reprezentat de un vector (sir) de cantitati transportate de la un fabrica pana la o destinatie de forma:
+
+    [Xbp, Xbpe, Xbc, Xcp, Xcpe, Xcc] ( aceasta va fi si ordinea in vector pentru a putea folosi indexii pentru identificarea unei cantitati)
+
+    unde:
+        Xbp - Cantitatea de la Bucuresti la Ploiesti
+        Xbpe - Cantitatea de la Bucuresti la Pitesti
+        Xbc - Cantitatea de la Bucuresti la Cluj
+        Xcp - Cantitatea de la Craiova la Ploiesti
+        Xcpe - Cantitatea de la Craiova la Pitesti
+        Xcc - Cantitatea de la Craiova la Cluj
+
+ 3. Functia de fitness:
+    Fitnessul unui individ va depinde de costul de transport, calculat dupa formula:
+
+     Cost = 50 * Xbp + 70 * Xbpe + 90 * Xbc + 60 * Xcp + 70 * Xcpe + 100 * Xcc
+
+     Problema este de minimizare a costului => Functia fitness va fi inversa functiei costului
+
+     Fitness = 1 / Cost
+
+ 4. Populatia initiala:
+    Vom alege o populatie de 100 de indivizi
+
+    Fiecare individ va respecta conditiile legate de cantitatile maxime:
+
+        - Xbp + Xbpe + Xbc <= 120
+        - Xcp + Xcpe + Xcc <= 140
+        - Xbp + Xcp = 100
+        - Xbpe + Xcpe = 60
+        - Xbc + Xcc = 80
+
+    4.1 Initializarea populatiei:
+        - Initializam un vector de 6 elemente egale cu 0
+        - Initializam Xbp cu o valoarea aleatoare intre 0 si 100 ( min(120, 100) )
+        - Xcp va fi 100 - Xbp
+        - while (Xcp + Xcpe sa nu depaseasc 140):
+            - Initializam Xbpe cu o valoare aleagtaore intre 0 si min(120 - Xbp, 60)
+            - Xcpe va fi 60 - Xbpe
+        - while (Xcp + Xcpe + Xcc <= 140):
+            - Initializam Xbc cu valoarea aleatoare intre 0 si min(120 - Xbp - Xbpe, 80)
+            - Calculam Xcc = 80 - Xbc
+
+ 5. Selectia parintilor:
+    Aplicam selectia parintilor prin metoda Turneu cu k = 8 indivizi
+
+ 6. Crossover:
+    Aplicam incrucisarea unipunct cu verificarea constrangerilor legate de cantitati.
+    Daca un individ devine invalid, parintele va fi copiat in locul lui
+
+ 7. Mutatii:
+    Aplicam fluaj prin adaugarea unei cantitati de maxim 0.5 tone cu o probabilitate de mutatie de 0.5
+    Aplicam fluaj doar in cazul primelor 3 gene dintr-un individ, iar prin oglindire aplicam cantitatea negata genei echivalente din a doua jumnatate.
+    Exemplu:
+        - Daca Xbp creste cu 0.1 in urma unei mutatii, Xcp scade cu 0.1 ( index 0 si 3 )
+
+ 8. Selectia generatiei urmatoare:
+    Folosim o selectie elitista
+    Daca cel mai bun copil este mai slab fata de cel mai bun parinte, atunci parintele il inlocuieste in populatia generatiei urmatoare
+
+ 9. Conditii de oprire:
+    Atingerea unui numar de 25 de generatii.
+    Neimbunatatirea celui mai bun individ timp de 5 generatii.
