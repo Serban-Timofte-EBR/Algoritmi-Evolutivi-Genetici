@@ -1,0 +1,43 @@
+O universitate organizează o expediție științifică pe mare pentru vizitarea unor insule virgine din
+arhipelagul X, cu plecare dintr-un port al arhipelagului și revenire în același port. Nava nu poate fi
+reaprovizionată în timpul expediției. Resursele disponibile pe navă pot asigura vizitarea a n insule din
+cele 1.000 care formează arhipelagul (n << 1.000) și parcurgerea unei distanțe totale de maxim k
+kilometri. Folosiți un algoritm genetic pentru a alege insulele vizitate și ordinea de vizitare. Este
+preferată vizitarea unor insule aflate la distanțe cît mai mari. Distanțele între insule (inclusiv portul de
+plecare) se preiau sub forma unei matrice de ponderi dintr-un fișier text, unde D(i,j) = distanța între
+insula i și insula j.
+
+1. Datele Problemei:
+    - Vizitam un numar de n insule din cele 1000
+    - Putem parcurge maxim k kilometrii
+
+2. Reprezentarea individului:
+    - Individul este reprezentat de o permutare de dimensiune n ( numarul de insule )
+    - Acest individ reprezinta ordinea in care sunt vizitate porturile ( o sa includem si distantele de la portul initial si la revenire)
+
+3. Functia de fitness:
+    - Functia de fitness reprezinta suma distantelor dintre insule.
+    - Insula 0 -> Insula indiv[0] + Insula indiv[0] -> Insula indiv[1] + .... + Insula indiv[n-1] -> Insula indiv[n] + Insula indiv[n] -> Insula 0
+    - Functia de fitness trebuie sa se maximizeze
+
+4. Generearea populatiei initiale:
+    Generam o populatie de 100 de indivizi.
+    Un individ este reprezentat de o permutare de n insule.
+    Avem grija ca la generarea unui individ sa nu depasim limita de k kilometrii
+
+5. Selectarea parintilor:
+    Selectam parintii prin metoda turnir/turneu unde sunt alesi intr-un tuneu un numar de 10 indivizi
+
+6. Recombinarea parintilor:
+    Folosim recombinarea OCX cu probabilitatea de recombinare de 0.8
+
+7. Mutatii:
+    Aplicam mutatia prin interschimbare, in care schimbam pozitia a doua gene.
+    Probabilitatea de mutatie este de 0.2
+    Daca un individ devine invalid dupa mutatie, atunci se copiaza forma initiala a acestuia
+
+8. Selectia generatiei urmatoare:
+    Folosim selectia elitista
+
+9. Conditii de oprire:
+    Permitem un numar maxim de 30 de generatii sau maxim 10 generatii in care fitnessul celui mai bun individ nu s-a imbunatatit
