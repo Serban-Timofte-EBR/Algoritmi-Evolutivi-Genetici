@@ -1,0 +1,50 @@
+Cele N orașe stat din Grecia antică se luptă între ele pentru dominație, dar în fața unei amenințări
+externe hotărăsc să se unească. Pentru a stabili planul de apărare, delegații orașelor urmează să se
+întîlnească, fiecare oraș desemnîndu-și un singur reprezentant. Cunoscînd rivalitățile istorice dintre
+orașe folosiți un algoritm genetic pentru a găsi o modalitate de așezare a delegaților la masa tratativelor
+astfel încît delegații din orașe rivale să nu fie vecini (se presupune că acest lucru este posibil).
+Harta orașelor stat între care există animozități este exprimată printr-o matricea pătratică de ordin N,
+numită CONFLICT,
+𝐶𝑂𝑁𝐹𝐿𝐼𝐶𝑇(𝑖, 𝑗) = {0, 𝑑𝑎𝑐ă 𝑖 ș𝑖 𝑗 𝑛𝑢 𝑠𝑒 𝑎𝑓𝑙ă î𝑛 𝑠𝑡𝑎𝑟𝑒 𝑑𝑒 𝑐𝑜𝑛𝑓𝑙𝑖𝑐𝑡 𝑠𝑎𝑢 𝑖 = 𝑗
+                 {1, 𝑑𝑎𝑐ă 𝑜𝑟𝑎ș𝑢𝑙 𝑠𝑡𝑎𝑡 𝑖 𝑒𝑠𝑡𝑒 î𝑛 𝑐𝑜𝑛𝑓𝑙𝑖𝑐𝑡 𝑐𝑢 𝑜𝑟𝑎ș𝑢𝑙 𝑠𝑡𝑎𝑡 𝑗
+
+1. Datele problemei:
+    - Avem N reprezentati de asezat la masa
+    - Avem matricea CONFLICT de dimensiune NxN
+
+2. Reprezentarea indivizilor:
+    - Fiecare individ va fi reprezentat de o permutare de dimensiune N
+    - Valorile din permutare reprezinta numarul orasului a carui reprezentat este asezat o anumita pozitie la masa
+    - EX:
+        individ: [2, 1, 3, 5, 4]
+        index:    1  2  3  4  5
+        Interpretare: Reprezentatul orasului 2 este asezat primul la masa. Reprezentatul orasului 1 este asezat al doilea la masa.
+        Reprezentatul orasului 3 este asezat al treilea la masa. Reprezentatul orasului 5 este asezat al patrulea la masa.
+        Reprezentatul orasului 4 este asezat al cincilea la masa.
+
+5. Functia de fitness:
+    - Preluam individul de pe pozitia i si i+1 si cautam in matricea CONFLICT valoarea asociata liniei i si coloanei i+1
+    - Adaugam valoarea din matrice la valoarea totala (nrConflicte)
+    - Dorim sa minimizam numarul de conflicte. Valoarea fitness va fi 1/nrConflicte + 1, pentru a evita impartirea la 0
+
+4. Generarea populatiei initiale:
+    - Generam o populatie de 50 de indivizi
+    - Fiecare individ este reprezentat conform punctului 2), iar la final este adaugata valoarea fitnessului
+    - Nu avem restrictii la generarea indivizilor
+
+5. Selectia parintilor:
+    - Selectam populatia de parinti prin metoda turneu in care consideram 5 indivizi
+
+6. Recombinarea:
+    - Folosim recombinarea prin PMX, fara a avea constrangeri legate de validitatea individului optinut
+    - Probabilitatea de recombinare este de 0.8
+    - Daca doi parinti nu se recombina, acestia vor fi copiati in populatia de copii
+
+7. Mutatii:
+    - Folosim mutatia prin inversiune in care inversam doua valori de la 2 indexi din individul selectat
+    - Probabilitatea de mutatie este de 0.2
+    - Nu avem constrangeri legate de validitatea individului
+
+8. Selectarea populatiei urmatoare:
+    - Daca cel mai bun parinte este mai bun decat cel mai bun copil, acesta va fi copiat in populatia urmatoare
+    - Astfel, implementam componenta elitista

@@ -140,8 +140,7 @@ def algoritm(dim, k):
     print("Cost:")
     print(1/best_fitness)
 
-
 '''
 Apelarea algortimului
 '''
-algoritm(5, 3)
+algoritm(10, 3)
